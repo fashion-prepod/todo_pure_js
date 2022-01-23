@@ -56,3 +56,8 @@ todoList.addEventListener('click', function ({target}) {
 });
 
 
+todoList.addEventListener('click', function ({target}) {
+    if (target.classList.contains('fa-check-circle')) {
+        // TODO: done-undone logic here       
+    }
+});
