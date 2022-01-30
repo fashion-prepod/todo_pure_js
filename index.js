@@ -8,6 +8,7 @@
 const userInput = document.querySelector('.user-input');
 const addBtn = document.querySelector('.add');
 const todoList = document.querySelector('.todo-list');
+const todos = [];
 
 const generateTodo = (innerText) => {
     const myDiv = document.createElement('div');
@@ -31,8 +32,12 @@ const addTodo = () => {
     }
 
     const todo = generateTodo(userInput.value);
+    const id = String(Math.random());
+    const todoModel = {id, text: userInput.value, done: false, anchor: todo};
+    todos.push(todoModel);
     userInput.value = '';
     userInput.focus();
+    todo.id = id;
     todoList.append(todo); 
 };
 
@@ -53,6 +58,31 @@ todoList.addEventListener('click', function ({target}) {
         // target.parentElement.remove();
         target.closest('.todo').remove();
     }
+});
+
+
+todoList.addEventListener('click', function ({target}) { // p, button, i
+
+    if (target.classList.contains('fa-check-circle')) {
+        const clickedTodo = todos.find((todo) => todo.id === target.parentElement.id);
+    
+        clickedTodo.done = !clickedTodo.done;
+
+        if (clickedTodo.done) {
+            target.parentElement.classList.add('done');
+            target.classList.replace('far', 'fas');
+        } else {
+            target.parentElement.classList.remove('done');
+            target.classList.replace('fas', 'far');
+        }
+            
+
+        console.log(todos);
+    }
+
+
+      
+
 });
 
 
